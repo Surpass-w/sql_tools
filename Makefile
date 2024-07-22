@@ -1,6 +1,13 @@
 export GOPROXY=https://goproxy.cn,direct
 
-LDFLAGS="-w -s"
+VERSION="v1.0.0"
+COMMIT_ID=`git rev-parse --short HEAD`
+BUILD_TIME=`date "+%Y-%m-%d %H:%M:%S"`
+
+LDFLAGS="-w -s \
+-X 'main.Version=${VERSION}' \
+-X 'main.CommitID=${COMMIT_ID}' \
+-X 'main.BuildTime=${BUILD_TIME}'"
 
 all: clear build
 
