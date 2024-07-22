@@ -1,2 +1,7 @@
-./.idea/
-./bin/
+/logs
+**/*.o
+**/*.tmp
+**/.vscode/*
+.gitignore
+.idea
+bin
