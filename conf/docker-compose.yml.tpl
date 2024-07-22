@@ -3,7 +3,7 @@ services:
   mysql:
     user: mysql
     image: mysql:8.3.0
-    container_name: mysql
+    container_name: {{ CONTAINER_NAME }}
     network_mode: host
     restart: always
     volumes:

@@ -24,18 +24,20 @@ var cnfCmd = &cobra.Command{
 
 func init() {
 	var (
-		mysqlDir     string
-		serverId     int
-		localAddress string
-		groupSeeds   string
-		groupName    string
-		port         int
-		mysqlxPort   int
+		mysqlDir      string
+		serverId      int
+		localAddress  string
+		groupSeeds    string
+		groupName     string
+		port          int
+		mysqlxPort    int
+		containerName string
 	)
 	genCmd.AddCommand(ymlCmd, cnfCmd)
 	ymlCmd.Flags().SortFlags = true
 	cnfCmd.Flags().SortFlags = true
 	ymlCmd.Flags().StringVarP(&mysqlDir, "mysql_dir", "d", "", "mysql_dir(ex: /mnt/mysql_node1/)")
+	ymlCmd.Flags().StringVarP(&containerName, "container_name", "c", "mysql", "container_name(ex: mysql)")
 	cnfCmd.Flags().IntVarP(&serverId, "server_id", "i", 1, "server_id(ex: 1)")
 	cnfCmd.Flags().StringVarP(&localAddress, "local_address", "l", "", "local_address(ex: 192.168.152.21:33306)")
 	cnfCmd.Flags().StringVarP(&groupSeeds, "group_seeds", "g", "", "group_seeds(ex: 192.168.152.21:33306,192.168.152.22:33306,192.168.152.22:33307)")
@@ -51,9 +53,11 @@ func init() {
 		data := make(map[string]interface{})
 		params := make(map[string]interface{})
 		data["MYSQL_DIR"] = mysqlDir
+		data["CONTAINER_NAME"] = containerName
 		params["SOURCE_PATH"] = sourcePath
 		params["TARGET_PATH"] = targetPath
 		params["MYSQL_DIR"] = mysqlDir
+		params["CONTAINER_NAME"] = containerName
 		fmt.Println(params)
 		err := service.RenderFile(sourcePath, targetPath, data)
 		return err
