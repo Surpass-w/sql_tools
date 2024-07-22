@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  mysql:
+    user: mysql
+    image: mysql:8.3.0
+    container_name: mysql
+    network_mode: host
+    restart: always
+    volumes:
+      - /mnt/mysql_node1/data/mysql:/var/lib/mysql
+      - /mnt/mysql_node1/conf.d:/etc/mysql/conf.d
+      - /mnt/mysql_node1/data/tmp:/tmp
